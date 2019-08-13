@@ -4,6 +4,7 @@ node_modules/
 
 # production
 /build
+config/default.json
 
 # misc
 .DS_Store

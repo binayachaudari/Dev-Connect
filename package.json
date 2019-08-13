@@ -25,6 +25,7 @@
   "homepage": "https://github.com/binayachaudari/Dev-Connect#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
     "config": "^3.2.2",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
