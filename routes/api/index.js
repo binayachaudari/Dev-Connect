@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const authenticate = require('../../middleware/tokenAuthenticate');
-
 
 /**
  * @route   /api/auth
@@ -28,7 +26,7 @@ router.use('/profile', require('./profile'));
  * @desc    Middleware for /api/users Route
  * @access  Protected
  */
-router.use('/users', authenticate, require('./users'));
+router.use('/users', require('./users'));
 
 
 module.exports = router;
