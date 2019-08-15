@@ -6,6 +6,7 @@ const authenticateToken = require('../../middleware/tokenAuthenticate');
 const { myProfile, updateProfile, deleteProfile } = require('../../controller/profile/myProfile');
 const { addExperience, editExperience, deleteExperience } = require('../../controller/profile/experience');
 const { addEducation, editEducation, deleteEducation } = require('../../controller/profile/education');
+const githubProfile = require('../../controller/profile/github');
 
 /**
  * @route   POST /api/profile/
@@ -86,5 +87,14 @@ router.route('/education/:edu_id')
   .put(authenticateToken, editEducation)
   .delete(authenticateToken, deleteEducation);
 
+
+
+/**
+* @route   GET /api/profile/github/:username
+* @desc    Get github repo
+* @access  Public 
+*/
+router.route('/github/:username')
+  .get(githubProfile)
 
 module.exports = router;
