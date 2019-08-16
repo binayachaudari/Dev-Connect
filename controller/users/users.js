@@ -1,6 +1,19 @@
 const Profile = require('../../models/Profile');
 
-module.exports = async (req, res, next) => {
+
+userData = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json({ user });
+  } catch (err) {
+    next({
+      status: 500,
+      message: err.message
+    });
+  }
+}
+
+userDataByID = async (req, res, next) => {
   try {
     const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
 
@@ -20,4 +33,9 @@ module.exports = async (req, res, next) => {
       message: "Invalid User ID"
     })
   }
+}
+
+module.exports = {
+  userData,
+  userDataByID
 }
