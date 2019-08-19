@@ -3,8 +3,12 @@ node_modules/
 
 
 # production
-/build
+client/build
 config/default.json
+
+
+# testing
+client/coverage
 
 # misc
 .DS_Store
