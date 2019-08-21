@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './assets/css/App.css';
 
@@ -14,8 +14,16 @@ import Register from './components/auth/Register';
 import { Provider } from 'react-redux';
 import store from './store';
 
-const App = () =>
-  <Provider store={store}>
+import { loadUser } from './actions/auth.action';
+
+
+const App = () => {
+  // Similar to componentDidMount
+  useEffect(() => {
+    store.dispatch(loadUser())
+  }, []);
+
+  return (<Provider store={store}>
     <Router>
       <Fragment>
         <Navbar />
@@ -27,6 +35,7 @@ const App = () =>
       </Fragment>
     </Router>
   </Provider>
-
+  )
+}
 
 export default App;

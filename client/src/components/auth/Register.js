@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { setAlert } from '../../actions/alert.action';
+import { register } from '../../actions/auth.action';
 
 import Alert from '../layouts/Alert';
 
@@ -17,7 +18,8 @@ class Register extends Component {
   }
 
   static propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
   }
 
 
@@ -35,26 +37,8 @@ class Register extends Component {
     if (password !== password2) {
       this.props.setAlert('Password Do not Match', 'danger', 3000);
     } else {
-      this.props.setAlert('Success', 'success', 3000);
-      // const newUser = {
-      //   name,
-      //   email,
-      //   password
-      // }
-      // try {
-      //   const config = {
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     } 
-      //   }
-      //   const body = JSON.stringify(newUser);
-      //   const res = await Axios.post('/api/auth/register', body, config);
-      //   console.log(res.data);
-
-      // } catch (err) {
-      //   const { status, message } = err.response.data
-      //   console.log(status, message)
-      // }
+      // this.props.setAlert('Success', 'success', 3000);
+      this.props.register({ name, email, password })
     }
   }
 
@@ -68,30 +52,28 @@ class Register extends Component {
         <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
         <form className="form" onSubmit={this.onSubmit}>
           <div className="form-group">
-            <input type="text" placeholder="Name" name="name" value={name} onChange={this.onChange} required />
+            <input type="text" placeholder="Name" name="name" value={name} onChange={this.onChange} />
           </div>
           <div className="form-group">
-            <input type="email" placeholder="Email Address" name="email" value={email} onChange={this.onChange} required />
+            <input type="email" placeholder="Email Address" name="email" value={email} onChange={this.onChange} />
           </div>
           <div className="form-group">
             <input
               type="password"
               placeholder="Password"
               name="password"
-              minLength="8"
               value={password}
               onChange={this.onChange}
-              required />
+            />
           </div>
           <div className="form-group">
             <input
               type="password"
               placeholder="Confirm Password"
               name="password2"
-              minLength="8"
               value={password2}
               onChange={this.onChange}
-              required />
+            />
           </div>
           <input type="submit" className="btn btn-primary" value="Register" />
         </form>
@@ -103,4 +85,4 @@ class Register extends Component {
   }
 }
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
