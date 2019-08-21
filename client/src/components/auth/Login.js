@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../actions/auth.action';
+import Alert from '../layouts/Alert';
+
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   state = {
@@ -8,6 +13,12 @@ class Login extends Component {
       password: '',
     }
   };
+
+
+  static propTypes = {
+    login: PropTypes.func.isRequired
+  }
+
 
   onChange = (e) => {
     const newFormData = { ...this.state.formData }
@@ -19,7 +30,7 @@ class Login extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = this.state.formData;
-    console.log(email, password);
+    this.props.login(email, password);
   }
 
   render() {
@@ -27,6 +38,7 @@ class Login extends Component {
 
     return (
       <section className="container">
+        <Alert />
         <h1 className="large text-primary">Sign In</h1>
         <p className="lead"><i className="fas fa-user"></i> Sign into Your Account</p>
         <form className="form" onSubmit={this.onSubmit}>
@@ -60,4 +72,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, { login })(Login);

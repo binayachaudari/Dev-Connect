@@ -20,7 +20,8 @@ import { loadUser } from './actions/auth.action';
 const App = () => {
   // Similar to componentDidMount
   useEffect(() => {
-    store.dispatch(loadUser())
+    if (localStorage.getItem('x-access-token'))
+      store.dispatch(loadUser())
   }, []);
 
   return (<Provider store={store}>
