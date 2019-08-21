@@ -1,5 +1,5 @@
 const Profile = require('../../models/Profile');
-
+const User = require('../../models/Users');
 
 userData = async (req, res, next) => {
   try {
