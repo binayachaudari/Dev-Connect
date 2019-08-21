@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
+import { setAlert } from '../../actions/alert.action';
+
+import Alert from '../layouts/Alert';
 
 class Register extends Component {
   state = {
@@ -10,6 +15,11 @@ class Register extends Component {
       password2: ''
     }
   }
+
+  static propTypes = {
+    setAlert: PropTypes.func.isRequired
+  }
+
 
   onChange = (e) => {
     const newFormData = { ...this.state.formData }
@@ -23,9 +33,9 @@ class Register extends Component {
     const { name, email, password, password2 } = this.state.formData;
 
     if (password !== password2) {
-      console.log('Password Do not Match')
+      this.props.setAlert('Password Do not Match', 'danger', 3000);
     } else {
-      console.log('SUCCESS')
+      this.props.setAlert('Success', 'success', 3000);
       // const newUser = {
       //   name,
       //   email,
@@ -53,6 +63,7 @@ class Register extends Component {
 
     return (
       <section className="container">
+        <Alert />
         <h1 className="large text-primary">Sign Up</h1>
         <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
         <form className="form" onSubmit={this.onSubmit}>
@@ -92,4 +103,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect(null, { setAlert })(Register);

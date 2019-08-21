@@ -135,7 +135,7 @@ img {
   border: none;
   cursor: pointer;
   margin: 1rem;
-  transition: opacity 0.2s ease-in;
+  transition: background-color 0.2s ease-in;
   outline: none;
 }
 
@@ -150,10 +150,13 @@ img {
 
 .alert {
   padding: 0.8rem;
-  margin: 1rem 0;
+  margin: 1rem auto;
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
+  border-radius: 5px;
+  width: 70%;
+  transition: all 1s ease-in;
 }
 
 .btn-primary,
