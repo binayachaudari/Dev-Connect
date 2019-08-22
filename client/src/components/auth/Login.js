@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth.action';
 import Alert from '../layouts/Alert';
@@ -16,7 +16,8 @@ class Login extends Component {
 
 
   static propTypes = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
   }
 
 
@@ -35,6 +36,14 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state.formData;
+    const { isAuthenticated } = this.props;
+
+    //Redirect to dashboard
+    if (isAuthenticated) {
+      return (
+        <Redirect to='/dashboard' />
+      )
+    }
 
     return (
       <section className="container">
@@ -72,4 +81,8 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { login })(Login);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);

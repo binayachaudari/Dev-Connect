@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { setAlert } from '../../actions/alert.action';
@@ -19,7 +19,8 @@ class Register extends Component {
 
   static propTypes = {
     setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
   }
 
 
@@ -44,6 +45,14 @@ class Register extends Component {
 
   render() {
     const { name, email, password, password2 } = this.state.formData;
+    const { isAuthenticated } = this.props;
+
+    //Redirect to dashboard
+    if (isAuthenticated) {
+      return (
+        <Redirect to='/dashboard' />
+      )
+    }
 
     return (
       <section className="container">
@@ -85,4 +94,10 @@ class Register extends Component {
   }
 }
 
-export default connect(null, { setAlert, register })(Register);
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

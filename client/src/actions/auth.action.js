@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL } from './types';
+import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types';
 import { setAlert } from './alert.action';
 import setAuthToken from '../utils/saveAuthToken';
 
@@ -20,7 +20,7 @@ export const loadUser = () => async (dispatch) => {
       type: AUTH_ERROR
     });
   }
-}
+};
 
 /**
  * 
@@ -33,7 +33,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
     name,
     email,
     password
-  }
+  };
   const body = JSON.stringify(newUser);
 
   try {
@@ -62,7 +62,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
       type: REGISTER_FAIL
     });
   }
-}
+};
 
 
 /**
@@ -79,7 +79,7 @@ export const login = (email, password) => async (dispatch) => {
       headers: {
         'Content-Type': 'application/json'
       }
-    }
+    };
     const res = await Axios.post('/api/auth/login', body, config);
 
     dispatch({
@@ -88,7 +88,6 @@ export const login = (email, password) => async (dispatch) => {
     });
 
     dispatch(loadUser());
-
 
   } catch (err) {
     const { message } = err.response.data;
@@ -101,6 +100,15 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_FAIL
-    })
+    });
   }
-}
+};
+
+/**
+ * LOGOUT 
+ */
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOGOUT
+  });
+};
