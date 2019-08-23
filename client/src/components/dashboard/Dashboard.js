@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile.action';
+import Alert from '../layouts/Alert';
 import Loading from '../layouts/Loading';
 import PropTypes from 'prop-types';
 
@@ -10,6 +11,10 @@ class Dashboard extends Component {
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
     getCurrentProfile: PropTypes.func.isRequired
+  }
+
+  componentDidMount() {
+    this.props.getCurrentProfile();
   }
 
   componentDidUpdate(prevProps) {
@@ -22,6 +27,7 @@ class Dashboard extends Component {
     const { auth } = this.props;
     return (
       <div className='container'>
+        <Alert />
         {(!profile && loading) ? <Loading /> :
           <Fragment>
             <h1 className="large text-primary">Dashboard</h1>

@@ -109,7 +109,7 @@ export const login = (email, password) => async (dispatch) => {
 /**
  * LOGOUT 
  */
-export const logout = () => dispatch => {
+export const logout = (history) => dispatch => {
   dispatch({
     type: CLEAR_PROFILE
   });
