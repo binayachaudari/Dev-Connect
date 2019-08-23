@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateProfile } from '../../actions/profile.action';
+import { updateProfile, getCurrentProfile } from '../../actions/profile.action';
 import Alert from '../layouts/Alert';
 import PropTypes from 'prop-types';
 
-class CreateProfile extends Component {
+class EditProfile extends Component {
   state = {
     company: '',
     website: '',
@@ -22,10 +22,52 @@ class CreateProfile extends Component {
     social_inputs: false
   }
 
-
   static propTypes = {
     updateProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired
   }
+
+  componentDidMount = () => {
+    const { profile, loading } = this.props.profile;
+    this.props.getCurrentProfile();
+    this.setState({
+      company: loading || !profile.company ? '' : profile.company,
+      website: loading || !profile.website ? '' : profile.website,
+      location: loading || !profile.location ? '' : profile.location,
+      status: loading || !profile.status ? '' : profile.status,
+      bio: loading || !profile.bio ? '' : profile.bio,
+      github_username: loading || !profile.github_username ? '' : profile.github_username,
+      skills: loading || !profile.skills ? '' : profile.skills.join(', '),
+      facebook: loading || !profile.facebook ? '' : profile.facebook,
+      twitter: loading || !profile.twitter ? '' : profile.twitter,
+      instagram: loading || !profile.instagram ? '' : profile.instagram,
+      linked_in: loading || !profile.linked_in ? '' : profile.linked_in,
+      youtube: loading || !profile.youtube ? '' : profile.youtube,
+      social_inputs: false
+    });
+  }
+
+  componentDidUpdate = (prevProps) => {
+    const { profile, loading } = this.props.profile;
+    if (prevProps.profile.loading !== loading)
+      this.setState({
+        company: loading || !profile.company ? '' : profile.company,
+        website: loading || !profile.website ? '' : profile.website,
+        location: loading || !profile.location ? '' : profile.location,
+        status: loading || !profile.status ? '' : profile.status,
+        bio: loading || !profile.bio ? '' : profile.bio,
+        github_username: loading || !profile.github_username ? '' : profile.github_username,
+        skills: loading || !profile.skills ? '' : profile.skills.join(', '),
+        facebook: loading || !profile.social ? '' : profile.social.facebook,
+        twitter: loading || !profile.social ? '' : profile.social.twitter,
+        instagram: loading || !profile.social ? '' : profile.social.instagram,
+        linked_in: loading || !profile.social ? '' : profile.social.linked_in,
+        youtube: loading || !profile.social ? '' : profile.social.youtube,
+        social_inputs: false
+      });
+  }
+
 
   toggleSocialInputs = () => {
     this.setState({ ...this.state, social_inputs: !this.state.social_inputs })
@@ -40,7 +82,7 @@ class CreateProfile extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.updateProfile({ ...this.state }, this.props.history)
+    this.props.updateProfile({ ...this.state }, this.props.history, true);
   }
 
   render() {
@@ -164,4 +206,8 @@ class CreateProfile extends Component {
   }
 }
 
-export default connect(null, { updateProfile })(withRouter(CreateProfile));
+const mapStateToProps = state => ({
+  profile: state.profile
+})
+
+export default connect(mapStateToProps, { updateProfile, getCurrentProfile })(withRouter(EditProfile));

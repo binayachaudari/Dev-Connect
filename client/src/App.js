@@ -10,6 +10,7 @@ import Register from './components/auth/Register';
 
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/Profile-Form/CreateProfile';
+import EditProfile from './components/Profile-Form/EditProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 /**
@@ -36,6 +37,7 @@ const App = () => {
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+          <PrivateRoute exact path='/edit-profile' component={EditProfile} />
         </Switch>
       </Fragment>
     </Router>

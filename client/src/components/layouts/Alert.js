@@ -7,6 +7,12 @@ class Alert extends Component {
     alerts: PropTypes.array.isRequired,
   }
 
+  componentDidUpdate = (prevProps) => {
+    console.log(prevProps)
+    if (prevProps.alerts.type !== 'success')
+      window.scrollTo(0, 0);
+  }
+
   render() {
     const { alerts } = this.props;
     return (

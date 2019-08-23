@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile.action';
 import Alert from '../layouts/Alert';
 import Loading from '../layouts/Loading';
+import DashboardNav from './DashboardNav';
 import PropTypes from 'prop-types';
 
 class Dashboard extends Component {
@@ -18,7 +19,7 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.profile === this.props.profile)
+    if (prevProps.profile.loading !== this.props.profile.loading)
       this.props.getCurrentProfile();
   }
 
@@ -32,7 +33,7 @@ class Dashboard extends Component {
           <Fragment>
             <h1 className="large text-primary">Dashboard</h1>
             <p className="lead username"><i className="fas fa-user"></i> Welcome {auth.user && auth.user.name}</p>
-            {profile ? <Fragment>has</Fragment> :
+            {profile ? <DashboardNav /> :
               <Fragment>
                 <p >Set up your Profile </p>
                 <Link to='/create-profile' className='btn btn-primary-outline'>Create Profile</Link>

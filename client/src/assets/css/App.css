@@ -578,6 +578,19 @@ p.my-1{
   margin-bottom: 0.5rem;
 }
 
+
+.dash-buttons a {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.dash-buttons a:hover, .dash-buttons a:hover i{
+  background-color: var(--primary-color);
+  color:var(--light-color);
+  transition: background-color 0.2s ease-in;
+}
+
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
