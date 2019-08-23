@@ -8,6 +8,9 @@ import LandingPage from './components/layouts/HomePage';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
+
 /**
  * REDUX
  */
@@ -28,6 +31,7 @@ const App = () => {
         <Navbar />
         <Route exact path='/' component={LandingPage} />
         <Switch>
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
         </Switch>

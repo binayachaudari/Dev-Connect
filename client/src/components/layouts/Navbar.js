@@ -15,6 +15,8 @@ class Navbar extends Component {
 
   authLinks = () => (
     <ul>
+      <li><Link to="/dashboard">
+        <i className='fas fa-user'></i>{' '}<span className='hide-sm'>Dashboard</span></Link></li>
       <li><a href="#!" onClick={this.props.logout}>
         <i className='fas fa-sign-out-alt'></i>{' '}<span className='hide-sm'>Logout</span></a></li>
     </ul>
@@ -32,6 +34,8 @@ class Navbar extends Component {
 
   render() {
     const { location } = this.props;
+
+    // eslint-disable-next-line
     const { isAuthenticated, loading } = this.props.auth;
 
     return (
@@ -39,7 +43,8 @@ class Navbar extends Component {
         <h1>
           <Link to='/'><i className="fas fa-code"></i> Dev-Connect</Link>
         </h1>
-        {!loading && (<Fragment> {isAuthenticated ? this.authLinks() : this.guestLinks()} </Fragment>)}
+        {/* {!loading && (<Fragment> {isAuthenticated ? this.authLinks() : this.guestLinks()} </Fragment>)} */}
+        {(<Fragment> {localStorage.getItem('x-access-token') || isAuthenticated ? this.authLinks() : this.guestLinks()} </Fragment>)}
       </nav>
     )
   }

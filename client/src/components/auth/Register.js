@@ -47,6 +47,12 @@ class Register extends Component {
     const { name, email, password, password2 } = this.state.formData;
     const { isAuthenticated } = this.props;
 
+    if (localStorage.getItem('x-access-token')) {
+      return (
+        <Redirect to='/dashboard' />
+      )
+    }
+
     //Redirect to dashboard
     if (isAuthenticated) {
       return (

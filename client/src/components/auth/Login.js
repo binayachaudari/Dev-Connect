@@ -38,6 +38,12 @@ class Login extends Component {
     const { email, password } = this.state.formData;
     const { isAuthenticated } = this.props;
 
+    if (localStorage.getItem('x-access-token')) {
+      return (
+        <Redirect to='/dashboard' />
+      )
+    }
+
     //Redirect to dashboard
     if (isAuthenticated) {
       return (
