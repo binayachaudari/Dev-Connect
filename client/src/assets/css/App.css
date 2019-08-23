@@ -338,6 +338,10 @@ section p.lead{
   width: 100%;
 }
 
+.profile-form input[type='date']:disabled{
+  background: var(--light-color);
+}
+
 .form input[type='submit'],
 button {
   font: inherit;

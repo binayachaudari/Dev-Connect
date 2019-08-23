@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
-import { GET_PROFILE, PROFILE_ERROR } from './types';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION } from './types';
 import setAuthToken from '../utils/saveAuthToken';
 
 /**
@@ -48,6 +48,78 @@ export const updateProfile = (formData, history, edit = false) => async dispatch
     if (!edit) {
       history.push('/dashboard');
     }
+
+  } catch (err) {
+    const { message } = err.response.data;
+
+    if (Array.isArray(message)) {
+      message.forEach((error, index) => dispatch(setAlert(error.msg, 'danger', 3000 + index * 300)));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { message: err.response.data.message, status: err.response.data.status }
+    });
+  }
+}
+
+/**
+ * Add Experience
+ */
+export const addExperience = (formData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await Axios.post('/api/profile/experience', formData, config)
+
+    dispatch({
+      type: UPDATE_EXPERIENCE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Experience Added', 'success', 3000));
+    history.push('/dashboard');
+
+  } catch (err) {
+    const { message } = err.response.data;
+
+    if (Array.isArray(message)) {
+      message.forEach((error, index) => dispatch(setAlert(error.msg, 'danger', 3000 + index * 300)));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { message: err.response.data.message, status: err.response.data.status }
+    });
+  }
+}
+
+
+
+/**
+ * Add Education
+ */
+export const addEducation = (formData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const res = await Axios.post('/api/profile/education', formData, config)
+
+    dispatch({
+      type: UPDATE_EDUCATION,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Education Added', 'success', 3000));
+    history.push('/dashboard');
 
   } catch (err) {
     const { message } = err.response.data;
