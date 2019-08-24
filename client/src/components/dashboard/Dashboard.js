@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile.action';
+import { deleteAccount } from '../../actions/profile.action';
 import Alert from '../layouts/Alert';
 import Loading from '../layouts/Loading';
 import DashboardNav from './DashboardNav';
@@ -13,7 +14,8 @@ class Dashboard extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
-    getCurrentProfile: PropTypes.func.isRequired
+    getCurrentProfile: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -40,8 +42,12 @@ class Dashboard extends Component {
                 <p >Set up your Profile </p>
                 <Link to='/create-profile' className='btn btn-primary-outline'>Create Profile</Link>
               </Fragment>}
-            <Experience experiences={profile.experience} />
-            <Education educations={profile.education} />
+            {profile && profile.experience.length > 0 && <Experience experiences={profile.experience} />}
+            {profile && profile.education.length > 0 && <Education educations={profile.education} />}
+            <div className="my-2"><button className="btn btn-danger-outline" onClick={this.props.deleteAccount}>
+              <i className="fas fa-user-minus mr-1"></i>
+              Delete Account
+              </button></div>
           </Fragment>
         }
       </div>
@@ -54,4 +60,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 })
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);

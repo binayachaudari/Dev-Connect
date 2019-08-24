@@ -1,4 +1,5 @@
 const Profile = require('../../models/Profile');
+const User = require('../../models/Users');
 
 myProfile = async (req, res, next) => {
   try {
@@ -101,6 +102,7 @@ deleteProfile =
       });
 
     } catch (err) {
+      console.log(err)
       next({
         status: 400,
         message: "Server Error"

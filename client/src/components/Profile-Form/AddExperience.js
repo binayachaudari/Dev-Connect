@@ -70,14 +70,14 @@ class AddExperience extends Component {
               value={company} onChange={this.onChange} required />
           </div>
           <div className="form-group">
-            <input type="text" placeholder="Location" name="location" value={location} onChange={this.onChange} />
+            <input type="text" className="required" placeholder="* Location" name="location" value={location} onChange={this.onChange} />
           </div>
           <div className="form-group">
-            <h4>From Date</h4>
-            <input type="date" name="from" min="2000-01-01" max={this.getMaxDate()} value={from} onChange={this.onChange} />
+            <h4>* From Date</h4>
+            <input type="date" className="required" name="from" min="2000-01-01" max={this.getMaxDate()} value={from} onChange={this.onChange} />
           </div>
           <div className="form-group">
-            <p><input type="checkbox" name="current"
+            <p><input type="checkbox" name="current" className="required mr-1"
               value={current} onChange={(e) => { this.setState({ ...this.state, current: !current }); }} /> Current Job</p>
           </div>
           <div className="form-group">

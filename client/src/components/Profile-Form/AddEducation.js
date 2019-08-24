@@ -70,14 +70,14 @@ class AddEducation extends Component {
               value={degree} onChange={this.onChange} required />
           </div>
           <div className="form-group">
-            <input type="text" placeholder="Field Of Study" name="field_of_study" value={field_of_study} onChange={this.onChange} />
+            <input type="text" className="required" placeholder="* Field Of Study" name="field_of_study" value={field_of_study} onChange={this.onChange} />
           </div>
           <div className="form-group">
-            <h4>From Date</h4>
-            <input type="date" name="from" min="2000-01-01" max={this.getMaxDate()} value={from} onChange={this.onChange} />
+            <h4>* From Date</h4>
+            <input type="date" className="required" name="from" min="2000-01-01" max={this.getMaxDate()} value={from} onChange={this.onChange} />
           </div>
           <div className="form-group">
-            <p><input type="checkbox" name="current"
+            <p><input type="checkbox" name="current" className="required mr-1"
               value={current} onChange={(e) => { this.setState({ ...this.state, current: !current }); }} />  Current School or Bootcamp</p>
           </div>
           <div className="form-group">
@@ -90,7 +90,7 @@ class AddEducation extends Component {
               name="description"
               cols="30"
               rows="5"
-              placeholder="Job Description"
+              placeholder="Education Description"
               value={description} onChange={this.onChange}
             ></textarea>
           </div>

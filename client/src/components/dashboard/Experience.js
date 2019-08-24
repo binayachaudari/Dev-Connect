@@ -21,6 +21,7 @@ class Experience extends Component {
       <tr key={exp._id} >
         <td>{exp.company}</td>
         <td className="hide-sm">{exp.title}</td>
+        <td className="hide-sm">{exp.location}</td>
         <td className="hide-sm">
           {this.getDate(exp.from)} - {exp.to ? this.getDate(exp.to) : 'Current'}
         </td>
@@ -39,6 +40,7 @@ class Experience extends Component {
             <tr>
               <th>Company</th>
               <th className="hide-sm">Title</th>
+              <th className="hide-sm">Location</th>
               <th className="hide-sm">Years</th>
               <th></th>
             </tr>

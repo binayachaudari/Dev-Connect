@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION, REMOVE_EXP_OR_EDU } from './types';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION, REMOVE_EXP_OR_EDU, ACCOUNT_DELETED, CLEAR_PROFILE } from './types';
 import setAuthToken from '../utils/saveAuthToken';
 
 /**
@@ -138,7 +138,6 @@ export const addEducation = (formData, history) => async dispatch => {
 /**
  * Delete Experience OR Education
  */
-
 export const deleteExpOrEdu = (id, endPoint) => async dispatch => {
   try {
     const res = await Axios.delete(`/api/profile/${endPoint}/${id}`);
@@ -154,3 +153,25 @@ export const deleteExpOrEdu = (id, endPoint) => async dispatch => {
     });
   }
 }
+
+/**
+ * Delete Account AND Profile
+ */
+export const deleteAccount = () => async dispatch => {
+  if (window.confirm('Are you sure? This cannot be UNDONE!')) {
+    try {
+      await Axios.delete('/api/profile/me');
+      dispatch({ type: CLEAR_PROFILE });
+      dispatch({ type: ACCOUNT_DELETED });
+      dispatch(setAlert('Account Has Been Permanantly Deleted!', 3000));
+    } catch (err) {
+      // console.log(err)
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: err
+      });
+    }
+  }
+}
+
