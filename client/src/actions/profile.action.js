@@ -163,7 +163,7 @@ export const deleteAccount = () => async dispatch => {
       await Axios.delete('/api/profile/me');
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
-      dispatch(setAlert('Account Has Been Permanantly Deleted!', 3000));
+      dispatch(setAlert('Account Has Been Permanantly Deleted!', '', 3000));
     } catch (err) {
       // console.log(err)
 
