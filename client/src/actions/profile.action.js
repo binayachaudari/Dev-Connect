@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION } from './types';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION, REMOVE_EXP_OR_EDU } from './types';
 import setAuthToken from '../utils/saveAuthToken';
 
 /**
@@ -128,6 +128,26 @@ export const addEducation = (formData, history) => async dispatch => {
       message.forEach((error, index) => dispatch(setAlert(error.msg, 'danger', 3000 + index * 300)));
     }
 
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { message: err.response.data.message, status: err.response.data.status }
+    });
+  }
+}
+
+/**
+ * Delete Experience OR Education
+ */
+
+export const deleteExpOrEdu = (id, endPoint) => async dispatch => {
+  try {
+    const res = await Axios.delete(`/api/profile/${endPoint}/${id}`);
+    dispatch({
+      type: REMOVE_EXP_OR_EDU,
+      payload: res.data
+    });
+    dispatch(setAlert('Profile Updated', 'success', 3000));
+  } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { message: err.response.data.message, status: err.response.data.status }

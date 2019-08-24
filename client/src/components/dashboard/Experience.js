@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { deleteExpOrEdu } from '../../actions/profile.action';
 import PropTypes from 'prop-types';
 
 class Experience extends Component {
   static propTypes = {
-    experiences: PropTypes.array.isRequired
+    experiences: PropTypes.array.isRequired,
+    deleteExpOrEdu: PropTypes.func.isRequired
   }
 
   getDate = (date) => {
@@ -23,7 +25,7 @@ class Experience extends Component {
           {this.getDate(exp.from)} - {exp.to ? this.getDate(exp.to) : 'Current'}
         </td>
         <td>
-          <button className="btn btn-danger">
+          <button className="btn btn-danger" onClick={() => this.props.deleteExpOrEdu(exp._id, 'experience')}>
             Delete
               </button>
         </td>
@@ -51,4 +53,4 @@ class Experience extends Component {
 }
 
 
-export default connect()(Experience);
+export default connect(null, { deleteExpOrEdu })(Experience);

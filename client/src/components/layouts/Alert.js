@@ -8,8 +8,7 @@ class Alert extends Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    console.log(prevProps)
-    if (prevProps.alerts.type !== 'success')
+    if (prevProps.alerts.length < 1)
       window.scrollTo(0, 0);
   }
 

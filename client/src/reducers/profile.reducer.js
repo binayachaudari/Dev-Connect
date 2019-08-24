@@ -1,4 +1,4 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_EXPERIENCE, UPDATE_EDUCATION } from '../actions/types';
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_EXPERIENCE, UPDATE_EDUCATION, REMOVE_EXP_OR_EDU } from '../actions/types';
 
 const intialState = {
   profile: null,
@@ -19,6 +19,13 @@ export default (state = intialState, action) => {
         ...payload,
         loading: false
       };
+
+    case REMOVE_EXP_OR_EDU:
+      return {
+        ...state,
+        profile: payload,
+        loading: false
+      }
 
     case PROFILE_ERROR:
       return {
