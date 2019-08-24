@@ -1,6 +1,9 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION, REMOVE_EXP_OR_EDU, ACCOUNT_DELETED, CLEAR_PROFILE } from './types';
+import {
+  GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION,
+  REMOVE_EXP_OR_EDU, ACCOUNT_DELETED, CLEAR_PROFILE, GET_ALL_PROFILES, GET_GITHUB_REPOS
+} from './types';
 import setAuthToken from '../utils/saveAuthToken';
 
 /**
@@ -17,6 +20,62 @@ export const getCurrentProfile = () => async dispatch => {
       payload: res.data
     });
 
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { message: err.response.data.message, status: err.response.data.status }
+    });
+  }
+}
+
+/**
+ * Get all users
+ */
+export const getAllProfile = () => async dispatch => {
+  // dispatch({ CLEAR_PROFILE });
+  try {
+    const res = await Axios.get('/api/users/all');
+    dispatch({
+      type: GET_ALL_PROFILES,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { message: err.response.data.message, status: err.response.data.status }
+    });
+  }
+}
+
+
+/**
+ * Get user profile by ID
+ */
+export const getProfileByID = (userID) => async dispatch => {
+  try {
+    const res = await Axios.get(`/api/users/${userID}`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { message: err.response.data.message, status: err.response.data.status }
+    });
+  }
+}
+
+/**
+ * Get github repos
+ */
+export const getGithubRepos = (githubUsername) => async dispatch => {
+  try {
+    const res = await Axios.get(`/api/profile/github/${githubUsername}`);
+    dispatch({
+      type: GET_GITHUB_REPOS,
+      payload: res.data
+    });
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

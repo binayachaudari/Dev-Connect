@@ -15,6 +15,7 @@ class Navbar extends Component {
 
   authLinks = () => (
     <ul>
+      <li><Link to="/developers">Developers</Link></li>
       <li><Link to="/dashboard">
         <i className='fas fa-user'></i>{' '}<span className='hide-sm'>Dashboard</span></Link></li>
       <li><a href="#!" onClick={this.props.logout}>
@@ -24,7 +25,7 @@ class Navbar extends Component {
 
   guestLinks = () => (
     <ul>
-      <li><Link to="/profiles">Developers</Link></li>
+      <li><Link to="/developers">Developers</Link></li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login">Login</Link></li>
     </ul>

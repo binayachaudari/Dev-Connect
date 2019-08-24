@@ -1,6 +1,18 @@
 const Profile = require('../../models/Profile');
 const User = require('../../models/Users');
 
+allUserData = async (req, res, next) => {
+  try {
+    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    res.json(profiles)
+  } catch (err) {
+    next({
+      status: 500,
+      message: err.message
+    });
+  }
+}
+
 userData = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -44,5 +56,6 @@ userDataByID = async (req, res, next) => {
 
 module.exports = {
   userData,
-  userDataByID
+  userDataByID,
+  allUserData
 }

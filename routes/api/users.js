@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const authenticateToken = require('../../middleware/tokenAuthenticate');
 
-const { userData, userDataByID } = require('../../controller/users/users');
+const { userData, userDataByID, allUserData } = require('../../controller/users/users');
 
 /**
  * @route   /api/users
@@ -11,6 +11,16 @@ const { userData, userDataByID } = require('../../controller/users/users');
 router.route('/')
   .get(authenticateToken, userData);
 
+
+/**
+* @route   /api/users/all
+* @desc    Get all users
+* @access  Private
+*/
+router.route('/all')
+  .get(allUserData);
+
+
 /**
 * @route   /api/users/user_id
 * @desc    Get user profile by user_id
@@ -18,5 +28,6 @@ router.route('/')
 */
 router.route('/:user_id')
   .get(userDataByID);
+
 
 module.exports = router;
