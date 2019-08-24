@@ -5,6 +5,8 @@ import { getCurrentProfile } from '../../actions/profile.action';
 import Alert from '../layouts/Alert';
 import Loading from '../layouts/Loading';
 import DashboardNav from './DashboardNav';
+import Experience from './Experience';
+import Education from './Education';
 import PropTypes from 'prop-types';
 
 class Dashboard extends Component {
@@ -38,8 +40,9 @@ class Dashboard extends Component {
                 <p >Set up your Profile </p>
                 <Link to='/create-profile' className='btn btn-primary-outline'>Create Profile</Link>
               </Fragment>}
+            <Experience experiences={profile.experience} />
+            <Education educations={profile.education} />
           </Fragment>
-
         }
       </div>
     )

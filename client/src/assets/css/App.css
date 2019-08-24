@@ -5,6 +5,7 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --hover-color: #28a7467e;
 }
 
 * {
@@ -126,12 +127,17 @@ img {
   margin: 3rem 0;
 }
 
+.mr-1 {
+  margin-right:1rem;
+}
+
 .mx {
   margin: 0 0.5rem;
 }
 .mx-1 {
   margin: 0 1rem;
 }
+
 .mx-2 {
   margin: 0 2rem;
 }
@@ -378,15 +384,40 @@ p.my-1{
   color: #0077b5;
 }
 
+.table{
+  width:100%;
+  border-collapse: collapse;
+}
+
 .table th,
 .table td {
   padding: 1rem;
-  text-align: left;
+  text-align: center;
+  border: 1px solid black;
 }
 
 .table th {
-  background: var(--light-color);
+  background: var(--primary-color);
+  color: var(--light-color);
 }
+
+.table tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: var(--hover-color);
+}
+
+.table td {
+  padding: 0;
+}
+
+.table td button{
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
 
 /* Navbar */
 .navbar {
