@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import GithubProfile from './GithubProfile';
 
 class Profile extends Component {
   static propTypes = {
@@ -26,19 +27,26 @@ class Profile extends Component {
   render() {
     const { profile: { loading, profile }, auth } = this.props;
     return (
-      <section className="container">
-        <Link to="/developers" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Back To Profiles</Link>
-        {(!loading && profile && !auth.loading && auth.isAuthenticated) ?
-          profile.user._id === auth.user._id &&
-          (<Link to="/edit-profile" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Edit Profile</Link>) : ''}
-
-        <div className="profile-grid my-1">
-          {(!profile) ? <h4>Loading...</h4> : <Fragment>
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
-          </Fragment>}
+      <section>
+        <div className="container" style={{ textAlign: 'center', margin: '3.875rem auto 0.5rem auto', display: 'block' }}>
+          <Link to="/developers" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Back To Developers</Link>
+          {(!loading && profile && !auth.loading && auth.isAuthenticated) ?
+            profile.user._id === auth.user._id &&
+            (<Link to="/edit-profile" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Edit Profile</Link>) : ''}
         </div>
-      </section >
+
+
+        {(!profile) ? <h4>Loading...</h4> : <Fragment>
+          <ProfileTop profile={profile} />
+          <div className="container">
+            <div className="profile-grid my-1">
+              <ProfileAbout profile={profile} />
+              {profile.github_username && <GithubProfile username={profile.github_username} />}
+            </div>
+          </div>
+        </Fragment>
+        }
+      </section>
     )
   }
 }
