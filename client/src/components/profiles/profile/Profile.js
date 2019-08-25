@@ -28,7 +28,7 @@ class Profile extends Component {
     const { profile: { loading, profile }, auth } = this.props;
     return (
       <section className="container">
-        <Link to="/developers" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Back To Profiles</Link>
+        <Link to="/developers" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Back To Developers</Link>
         {(!loading && profile && !auth.loading && auth.isAuthenticated) ?
           profile.user._id === auth.user._id &&
           (<Link to="/edit-profile" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Edit Profile</Link>) : ''}

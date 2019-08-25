@@ -33,7 +33,7 @@ function saveToDatabase(user, res, next) {
 module.exports = (req, res, next) => {
   const { name, email, password } = req.body;
 
-  const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+  const avatar = 'https://avatars.githubusercontent.com/username';
 
   const user = new User({
     name,

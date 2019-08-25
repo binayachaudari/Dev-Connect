@@ -30,7 +30,7 @@ class Profile extends Component {
           <div className="profiles">
             {developer_profiles.length > 0 ? (developer_profiles.map(profile => (
               <ProfileItem key={profile._id} profile={profile} />
-            ))) : loading ? <h4>Loading Profiles...</h4> : <h4>No Developer Profiles...</h4>}
+            ))) : <h4>Loading Profiles...</h4>}
           </div>
         </Fragment>
 
