@@ -27,7 +27,7 @@ class ProfileItem extends Component {
             <h2>{name}</h2>
             <p>{status} {company && <span>at {company}</span>}</p>
             <p>{location && <span>{location}</span>}</p>
-            <Link to={`/profile/${_id}`} className="btn btn-primary-outline" style={{ borderRadius: '5px' }}>View Profile</Link>
+            <Link to={`/developers/profile/${_id}`} className="btn btn-primary-outline" style={{ borderRadius: '5px' }}>View Profile</Link>
           </div>
 
           <ul>

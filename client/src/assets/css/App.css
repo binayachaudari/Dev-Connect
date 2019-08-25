@@ -198,9 +198,9 @@ img {
 
 .btn-light-outline,
 .badge-light-outline{
-  border: 1px solid var(--light-color);
+  border: 1px solid var(--dark-color);
   background-color: transparent;
-  color: white;
+  color: var(--dark-color);
 }
 
 .btn-light-outline:hover,

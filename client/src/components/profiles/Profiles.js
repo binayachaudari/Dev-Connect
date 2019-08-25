@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Loading from '../layouts/Loading';
 import ProfileItem from './ProfileItem';
 import { getAllProfile } from '../../actions/profile.action';
 import PropTypes from 'prop-types';
@@ -16,7 +15,7 @@ class Profile extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.profile.loading !== this.props.profile.loading)
+    if (prevProps.profile.developer_profiles === this.props.profile.developer_profiles)
       this.props.getAllProfile();
   }
 
@@ -24,16 +23,16 @@ class Profile extends Component {
     const { loading, developer_profiles } = this.props.profile;
     return (
       <section className="container">
-        {loading ? <Loading /> : <Fragment>
+        <Fragment>
           <h1 className="large text-primary">Developers</h1>
           <p className="lead">
             <i className="fab fa-connectdevelop"></i> Browse and connect with developers</p>
           <div className="profiles">
             {developer_profiles.length > 0 ? (developer_profiles.map(profile => (
               <ProfileItem key={profile._id} profile={profile} />
-            ))) : <h4>No Developer Profiles...</h4>}
+            ))) : loading ? <h4>Loading Profiles...</h4> : <h4>No Developer Profiles...</h4>}
           </div>
-        </Fragment>}
+        </Fragment>
 
       </section>
     )
