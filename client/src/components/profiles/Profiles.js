@@ -20,7 +20,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { loading, developer_profiles } = this.props.profile;
+    const { developer_profiles } = this.props.profile;
     return (
       <section className="container">
         <Fragment>

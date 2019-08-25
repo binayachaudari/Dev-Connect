@@ -475,6 +475,16 @@ p.my-1{
   margin-right: 0.6rem;
 }
 
+.nav-username{
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.nav-username:hover{
+  text-transform: uppercase;
+  color: white;
+}
+
 /* Landing Page */
 .landing {
   position: relative;
