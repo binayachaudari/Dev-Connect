@@ -52,8 +52,6 @@ export default (state = intialState, action) => {
       return {
         ...state,
         profile: null,
-        developer_profiles: [],
-        repos: [],
         loading: false,
         error: {}
       };

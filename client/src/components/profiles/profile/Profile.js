@@ -20,7 +20,7 @@ class Profile extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.profile.loading !== this.props.profile.loading)
+    if (prevProps.match.params.id !== this.props.match.params.id)
       this.props.getProfileByID(this.props.match.params.id);
   }
 

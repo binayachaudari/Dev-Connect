@@ -15,5 +15,8 @@ export const UPDATE_EDUCATION = 'UPDATE_EDUCATION';
 export const REMOVE_EXP_OR_EDU = 'REMOVE_EXP_OR_EDU';
 export const GET_ALL_PROFILES = 'GET_ALL_PROFILES';
 export const GET_GITHUB_REPOS = 'GET_GITHUB_REPOS';
+export const GET_POSTS = 'GET_POSTS';
+export const POST_ERROR = 'POST_ERROR';
+
 
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';

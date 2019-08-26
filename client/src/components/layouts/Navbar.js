@@ -16,6 +16,7 @@ class Navbar extends Component {
   authLinks = () => (
     <ul>
       <li><Link to="/developers">Developers</Link></li>
+      <li><Link to="/posts">Posts</Link></li>
       <li><Link to="/dashboard">
         <i className='fas fa-user'></i>{' '}<span className='hide-sm'>Dashboard</span></Link></li>
       <li><a href="#!" onClick={this.props.logout}>
@@ -25,7 +26,6 @@ class Navbar extends Component {
           <span className='nav-username'>
             {this.props.auth.user.name.trim().split(' ')[0]}</span></Link>
         </li>}
-
     </ul>
   )
 

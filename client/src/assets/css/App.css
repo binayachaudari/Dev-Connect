@@ -196,6 +196,13 @@ img {
   color: black;
 }
 
+.btn-white-outline,
+.badge-white-outline{
+  border: 1px solid var(--light-color);
+  background-color: transparent;
+  color: var(--light-color);
+}
+
 .btn-light-outline,
 .badge-light-outline{
   border: 1px solid var(--dark-color);
@@ -204,7 +211,9 @@ img {
 }
 
 .btn-light-outline:hover,
-.badge-light-outline:hover{
+.badge-light-outline:hover,
+.btn-white-outline:hover,
+.badge-white-outline:hover{
   border: 1px solid var(--primary-color);
   background-color: var(--primary-color);
   color: white;

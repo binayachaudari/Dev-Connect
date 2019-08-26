@@ -15,7 +15,7 @@ class GithubProfile extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.repos === this.props.repos)
+    if (prevProps.username !== this.props.username)
       this.props.getGithubRepos(this.props.username)
   }
 

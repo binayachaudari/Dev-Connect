@@ -19,7 +19,7 @@ const HomePage = ({ isAuthenticated }) => {
             other developers.
         </p>
           <div className="buttons">
-            <Link to="/register" className="btn btn-light-outline">Get Started</Link>
+            <Link to="/register" className="btn btn-white-outline">Get Started</Link>
           </div>
         </div>
       </div>

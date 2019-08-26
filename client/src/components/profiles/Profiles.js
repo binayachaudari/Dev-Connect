@@ -14,10 +14,10 @@ class Profile extends Component {
     this.props.getAllProfile();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.profile.developer_profiles === this.props.profile.developer_profiles)
-      this.props.getAllProfile();
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.profile.developer_profiles === this.props.profile.developer_profiles)
+  //     this.props.getAllProfile();
+  // }
 
   render() {
     const { developer_profiles } = this.props.profile;
