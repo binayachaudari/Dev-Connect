@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { setAlert } from './alert.action';
 import {
   GET_PROFILE, PROFILE_ERROR, UPDATE_EXPERIENCE, UPDATE_EDUCATION,
-  REMOVE_EXP_OR_EDU, ACCOUNT_DELETED, CLEAR_PROFILE, GET_ALL_PROFILES, GET_GITHUB_REPOS
+  REMOVE_EXP_OR_EDU, ACCOUNT_DELETED, CLEAR_PROFILE, GET_ALL_PROFILES, GET_GITHUB_REPOS, CLEAR_REPOS, UPDATE_DEV_PROFILE
 } from './types';
 import setAuthToken from '../utils/saveAuthToken';
 
@@ -33,7 +33,10 @@ export const getCurrentProfile = () => async dispatch => {
  * Get all users
  */
 export const getAllProfile = () => async dispatch => {
-  // dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({
+    type: CLEAR_REPOS
+  });
   try {
     const res = await Axios.get('/api/users/all');
     dispatch({
@@ -86,6 +89,13 @@ export const getGithubRepos = (githubUsername) => async dispatch => {
         payload: { message: err.response.data.message, status: err.response.data.status }
       });
   }
+}
+
+export const updateDevProfile = (data) => async dispatch => {
+  dispatch({
+    type: UPDATE_DEV_PROFILE,
+    payload: data
+  });
 }
 
 /**

@@ -22,10 +22,10 @@ class Dashboard extends Component {
     this.props.getCurrentProfile();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.profile.loading !== this.props.profile.loading)
-      this.props.getCurrentProfile();
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.profile.loading !== this.props.profile.loading)
+  //     this.props.getCurrentProfile();
+  // }
 
   render() {
     const { profile, loading } = this.props.profile;

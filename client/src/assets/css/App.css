@@ -607,6 +607,12 @@ p.my-1{
   grid-area: github;
 }
 
+.repo-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
 .profile-github .repo {
   display: flex;
 }

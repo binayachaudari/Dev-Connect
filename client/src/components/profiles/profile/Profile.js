@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProfileByID } from '../../../actions/profile.action';
+import { getProfileByID, updateDevProfile } from '../../../actions/profile.action';
 import PropTypes from 'prop-types';
 
 import ProfileTop from './ProfileTop';
@@ -9,18 +9,27 @@ import ProfileAbout from './ProfileAbout';
 import GithubProfile from './GithubProfile';
 
 class Profile extends Component {
+  state = {
+  }
+
   static propTypes = {
     getProfileByID: PropTypes.func.isRequired,
+    updateDevProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired
   };
 
   componentDidMount() {
+    const dev_profile = this.props.profile.developer_profiles.find(val => val.user._id === this.props.match.params.id);
+    if (dev_profile) {
+      this.props.updateDevProfile(dev_profile);
+    }
+
     this.props.getProfileByID(this.props.match.params.id);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id)
+    if (prevProps.profile.profile === this.props.profile.profile)
       this.props.getProfileByID(this.props.match.params.id);
   }
 
@@ -51,4 +60,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, { getProfileByID })(Profile);
+export default connect(mapStateToProps, { getProfileByID, updateDevProfile })(Profile);

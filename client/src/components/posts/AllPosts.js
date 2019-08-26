@@ -15,7 +15,7 @@ class AllPosts extends Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.post.loading !== this.props.post.loading)
+    if (prevProps.post.likes !== this.props.post.likes)
       this.props.getAllPosts();
   }
 
