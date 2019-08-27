@@ -13,6 +13,10 @@ class PostItem extends Component {
     deletePost: PropTypes.func.isRequired
   }
 
+  static defaultProps = {
+    displayDiscussionBtn: true
+  }
+
   getDate = (date) => {
     const ISODate = new Date(date);
     const options = { month: 'short', year: 'numeric', day: 'numeric' };
@@ -20,16 +24,16 @@ class PostItem extends Component {
   }
 
   getLikedUnlikeStatus = (likes, auth) => {
-    return likes.find(like => like.user === auth.user._id) ? 'primary' : 'light';
+    return likes.find(like => like.user === auth.user._id) ? 'bg-primary' : 'btn-light';
   }
 
   render() {
-    const { auth, post: { _id, text, user: { name, avatar }, likes, comments, date } } = this.props;
+    const { auth, post: { _id, text, user: { name, avatar }, likes, comments, date }, displayDiscussionBtn } = this.props;
     return (
       <div>
         <div className="post bg-white p-1 my-1">
           <div>
-            <Link to={`/developers/profile/${this.props.post.user._id}`}>
+            <Link to={`/developer/profile/${this.props.post.user._id}`}>
               <img
                 className="round-img"
                 src={avatar}
@@ -42,7 +46,7 @@ class PostItem extends Component {
             <p className="post-date">
               Posted on {this.getDate(date)}
             </p>
-            <button type="button" className={`btn btn-${
+            <button type="button" className={`btn ${
               (!auth.loading && auth.isAuthenticated) && this.getLikedUnlikeStatus(likes, auth)}`} style={{ margin: '15px' }} onClick={() => this.props.like(_id)}>
               <i className="fas fa-thumbs-up"></i>
               {likes.length > 0 && <span> {likes.length}</span>}
@@ -50,11 +54,11 @@ class PostItem extends Component {
             <button type="button" className="btn btn-light" onClick={() => this.props.unlike(_id)}>
               <i className="fas fa-thumbs-down"></i>
             </button>
-            <Link to="#1" className="btn btn-primary" style={{ margin: '15px' }}>
+            {displayDiscussionBtn && < Link to={`/post/${_id}`} className="btn btn-primary" style={{ margin: '15px' }}>
               Discussion {comments.length > 0 &&
                 <span className='comment-count'> {comments.length}</span>
               }
-            </Link>
+            </Link>}
             {(!auth.loading && auth.isAuthenticated) ?
               this.props.post.user._id === auth.user._id &&
               (<button
@@ -64,7 +68,7 @@ class PostItem extends Component {
               </button>) : ''}
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }

@@ -19,6 +19,8 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profiles/profile/Profile';
 import AllPosts from './components/posts/AllPosts';
 
+import SinglePost from './components/single-post/SinglePost';
+
 /**
  * REDUX
  */
@@ -43,12 +45,13 @@ const App = () => {
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/developers' component={Profiles} />
-          <Route exact path='/developers/profile/:id' component={Profile} />
+          <Route exact path='/developer/profile/:id' component={Profile} />
           <PrivateRoute exact path='/create-profile' component={CreateProfile} />
           <PrivateRoute exact path='/edit-profile' component={EditProfile} />
           <PrivateRoute exact path='/add-experience' component={AddExperience} />
           <PrivateRoute exact path='/add-education' component={AddEducation} />
           <PrivateRoute exact path='/posts' component={AllPosts} />
+          <PrivateRoute exact path='/post/:id' component={SinglePost} />
         </Switch>
       </Fragment>
     </Router>

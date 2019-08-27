@@ -22,6 +22,8 @@ export const CLEAR_REPOS = 'CLEAR_REPOS';
 export const UPDATE_DEV_PROFILE = 'UPDATE_DEV_PROFILE';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
+export const GET_SINGLE_POST = 'GET_SINGLE_POST';
+export const DISPLAY_POST = 'DISPLAY_POST';
 
 
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';

@@ -22,7 +22,7 @@ class Navbar extends Component {
       <li><a href="#!" onClick={this.props.logout}>
         <i className='fas fa-sign-out-alt'></i>{' '}<span className='hide-sm'>Logout</span></a></li>
       {(!this.props.auth.loading && this.props.auth.user) ?
-        <li><Link to={`/developers/profile/${this.props.auth.user._id}`}>
+        <li><Link to={`/developer/profile/${this.props.auth.user._id}`}>
           <span className='nav-username'>
             {this.props.auth.user.name.trim().split(' ')[0]}</span></Link>
         </li> : <li><span className='nav-username'>Welcome!</span></li>

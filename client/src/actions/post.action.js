@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
 import setAuthToken from '../utils/saveAuthToken';
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST } from './types';
+import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_SINGLE_POST, DISPLAY_POST } from './types';
 
 /**
  * Get All Posts
@@ -22,6 +22,37 @@ export const getAllPosts = () => async dispatch => {
       });
   }
 }
+
+/**
+ * Display Post from State
+ */
+export const displayPost = (data) => async dispatch => {
+  dispatch({
+    type: DISPLAY_POST,
+    payload: data
+  });
+}
+
+/**
+ * Get Single Post
+ */
+export const getSinglePost = (postID) => async dispatch => {
+  setAuthToken();
+  try {
+    const res = await Axios.get(`/api/posts/${postID}`);
+    dispatch({
+      type: GET_SINGLE_POST,
+      payload: res.data
+    });
+  } catch (err) {
+    if (err.response)
+      dispatch({
+        type: POST_ERROR,
+        payload: { message: err.response.data.message, status: err.response.data.status }
+      });
+  }
+}
+
 
 
 /**
@@ -93,7 +124,7 @@ export const addPost = (formData) => async dispatch => {
  */
 export const deletePost = (postID) => async dispatch => {
   try {
-    const res = await Axios.delete(`/api/posts/${postID}`);
+    await Axios.delete(`/api/posts/${postID}`);
     dispatch({
       type: DELETE_POST,
       payload: { postID }
