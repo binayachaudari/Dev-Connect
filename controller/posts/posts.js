@@ -61,12 +61,11 @@ addPost = async (req, res, next) => {
 
     const newPost = new Posts({
       text: req.body.text,
-      user
+      user: req.user.id
     });
 
     await newPost.save();
-
-    res.json(newPost);
+    res.json({ ...newPost._doc, user });
 
   } catch (err) {
     next({

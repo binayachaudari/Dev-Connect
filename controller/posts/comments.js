@@ -1,15 +1,17 @@
 const Posts = require('../../models/Posts');
+const User = require('../../models/Users');
 
 addComment = async (req, res, next) => {
   try {
+    const user = await User.findById(req.user.id).select(['id', 'name', 'avatar']);
     const post = await Posts.findById(req.params.post_id).populate('user', ['name', 'avatar']);
 
     const newComment = {
-      user: req.user.id,
+      user,
       text: req.body.text
     }
 
-    post.comments.push(newComment);
+    post.comments.unshift(newComment);
     await post.save();
 
     res.json(post.comments);
