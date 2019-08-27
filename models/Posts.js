@@ -24,8 +24,8 @@ const PostsSchema = new mongoose.Schema({
   comments: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        type: Object,
+        required: true
       },
       text: {
         type: String,

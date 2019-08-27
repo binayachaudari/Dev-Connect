@@ -4,12 +4,14 @@ const User = require('../../models/Users');
 addComment = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id).select(['id', 'name', 'avatar']);
-    const post = await Posts.findById(req.params.post_id).populate('user', ['name', 'avatar']);
+    const post = await Posts.findById(req.params.post_id);
 
     const newComment = {
       user,
       text: req.body.text
     }
+
+    console.log(newComment)
 
     post.comments.unshift(newComment);
     await post.save();
