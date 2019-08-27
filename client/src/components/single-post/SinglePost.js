@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSinglePost, displayPost } from '../../actions/post.action';
+import Alert from '../layouts/Alert';
 import PostItem from '../posts/PostItem';
+import CommentForm from './CommentForm';
+import CommentItem from './CommentItem';
 
 class singlePost extends Component {
   static propTypes = {
@@ -30,8 +33,14 @@ class singlePost extends Component {
     return (
       <section className="container">
         <Link to="/posts" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Back To Posts</Link>
-
-        {(!loading && post) ? <PostItem post={post} displayDiscussionBtn={false} /> : <h4>Loading...</h4>}
+        <Alert />
+        {(!loading && post) ? (
+          <Fragment>
+            <PostItem post={post} displayDiscussionBtn={false} />
+            <CommentForm postID={post._id} />
+            {post.comments.map(comment => (<CommentItem key={comment._id} comment={comment} postID={post._id}></CommentItem>))}
+          </Fragment>
+        ) : <h4>Loading...</h4>}
       </section>
     )
   }

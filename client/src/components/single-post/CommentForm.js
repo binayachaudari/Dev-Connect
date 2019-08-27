@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post.action';
+import { addComment } from '../../actions/post.action';
 
-class AddPost extends Component {
+class CommentForm extends Component {
   static propTypes = {
-    addPost: PropTypes.func.isRequired,
+    addComment: PropTypes.func.isRequired,
+    postID: PropTypes.string.isRequired
   }
 
   state = {
@@ -20,7 +21,7 @@ class AddPost extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.addPost({ ...this.state });
+    this.props.addComment(this.props.postID, { ...this.state });
     this.setState({ text: '' })
   }
 
@@ -33,7 +34,7 @@ class AddPost extends Component {
             name="text"
             cols="30"
             rows="5"
-            placeholder="Create a post"
+            placeholder="Leave a Comment"
             value={text}
             onChange={this.onChange}
             required
@@ -45,4 +46,4 @@ class AddPost extends Component {
   }
 }
 
-export default connect(null, { addPost })(AddPost);
+export default connect(null, { addComment })(CommentForm);

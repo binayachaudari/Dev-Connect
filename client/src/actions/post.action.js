@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
 import setAuthToken from '../utils/saveAuthToken';
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_SINGLE_POST, DISPLAY_POST } from './types';
+import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_SINGLE_POST, DISPLAY_POST, ADD_COMMENT, REMOVE_COMMENT } from './types';
 
 /**
  * Get All Posts
@@ -118,6 +118,60 @@ export const addPost = (formData) => async dispatch => {
       });
   }
 }
+
+/**
+ * Add Comment
+ */
+export const addComment = (postID, formData) => async dispatch => {
+  setAuthToken();
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const res = await Axios.put(`/api/posts/comment/${postID}`, formData, config);
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+    dispatch(setAlert('Comment Added', 'success', 3000));
+  } catch (err) {
+    if (err.response)
+      dispatch({
+        type: POST_ERROR,
+        payload: { message: err.response.data.message, status: err.response.data.status }
+      });
+  }
+}
+
+/**
+ * Delete Comment
+ */
+export const deleteComment = (postID, commentID) => async dispatch => {
+  setAuthToken();
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    await Axios.delete(`/api/posts/comment/${postID}/${commentID}`, config);
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: { commentID }
+    });
+    dispatch(setAlert('Comment Deleted', 'success', 3000));
+  } catch (err) {
+    if (err.response)
+      dispatch({
+        type: POST_ERROR,
+        payload: { message: err.response.data.message, status: err.response.data.status }
+      });
+  }
+}
+
+
 
 /**
  * Delete Post
