@@ -11,8 +11,6 @@ addComment = async (req, res, next) => {
       text: req.body.text
     }
 
-    console.log(newComment)
-
     post.comments.unshift(newComment);
     await post.save();
 
@@ -40,8 +38,8 @@ deleteComment = async (req, res, next) => {
       });
     }
 
-    //Check User
-    if (comment.user.toString() !== req.user.id) {
+    // Check User
+    if (comment.user._id.toString() !== req.user.id) {
       return next({
         status: 401,
         message: 'Unauthorized'
