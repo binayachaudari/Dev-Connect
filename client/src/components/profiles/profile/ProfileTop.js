@@ -13,14 +13,13 @@ class ProfileTop extends Component {
       location,
       website,
       social,
-      github_username
     } = this.props.profile;
 
     return (
       <div className="profile-top bg-primary p-2">
         <img
           className="round-img my-1"
-          src={github_username ? `https://avatars.githubusercontent.com/${github_username}` : avatar}
+          src={avatar}
           alt={name}
         />
         <h1 className="large">{name}</h1>

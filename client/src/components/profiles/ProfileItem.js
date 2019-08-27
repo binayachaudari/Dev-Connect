@@ -14,14 +14,13 @@ class ProfileItem extends Component {
       company,
       location,
       skills,
-      github_username
     } = this.props.profile
     return (
       <div>
         <div className="profile bg-light">
           <img
             className="round-img"
-            src={github_username ? `https://avatars.githubusercontent.com/${github_username}` : avatar}
+            src={avatar}
             alt={name}
           />
           <div>

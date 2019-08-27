@@ -59,6 +59,12 @@ updateProfile = async (req, res, next) => {
 
   try {
     let profile = await Profile.findOne({ user: req.user.id });
+    let user = await User.findById(req.user.id).select('avatar');
+
+    if (user) {
+      user.avatar = github_username ? `https://avatars.githubusercontent.com/${github_username}` : 'https://avatars.githubusercontent.com/username';
+      await user.save();
+    }
 
     //Update Profile
     if (profile) {
