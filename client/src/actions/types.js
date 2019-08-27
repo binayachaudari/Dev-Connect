@@ -20,7 +20,8 @@ export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const CLEAR_REPOS = 'CLEAR_REPOS';
 export const UPDATE_DEV_PROFILE = 'UPDATE_DEV_PROFILE';
-
+export const DELETE_POST = 'DELETE_POST';
+export const ADD_POST = 'ADD_POST';
 
 
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';

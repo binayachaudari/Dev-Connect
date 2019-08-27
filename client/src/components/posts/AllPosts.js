@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../../actions/post.action';
 import PostItem from './PostItem';
+import AddPost from './AddPost';
+import Alert from '../layouts/Alert';
+
 
 class AllPosts extends Component {
   static propTypes = {
@@ -14,10 +17,11 @@ class AllPosts extends Component {
     this.props.getAllPosts();
   }
 
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.post.likes !== this.props.post.likes)
-      this.props.getAllPosts();
-  }
+  // componentDidUpdate = (prevProps) => {
+  //   console.log(prevProps.post === this.props.post)
+  //   if (prevProps.post === this.props.post)
+  //     this.props.getAllPosts();
+  // }
 
   render() {
     const { posts, loading } = this.props.post;
@@ -27,7 +31,8 @@ class AllPosts extends Component {
           Posts
       </h1>
         <p className="lead"><i className="fas fa-user"></i> Welcome to the community!</p>
-        {/* Post Form */}
+        <Alert />
+        <AddPost />
         {loading ? <h4>Loading...</h4> :
           <div className="posts">
             {posts.map(post => (

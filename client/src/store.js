@@ -6,7 +6,12 @@ import rootReducer from './reducers';
 const initialState = {};
 
 const middleware = [ReduxThunk];
-
-const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
+const composeEnhancers = composeWithDevTools({
+  name: `Redux`,
+  realtime: true,
+  trace: true,
+  traceLimit: 25
+});
+const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(...middleware)));
 
 export default store;

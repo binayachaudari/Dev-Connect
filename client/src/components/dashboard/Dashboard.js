@@ -33,7 +33,7 @@ class Dashboard extends Component {
     return (
       <div className='container'>
         <Alert />
-        {(loading) ? <Loading /> :
+        {(loading || auth.loading) ? <Loading /> :
           <Fragment>
             <h1 className="large text-primary">Dashboard</h1>
             <p className="lead username"><i className="fas fa-user"></i> Welcome {auth.user && auth.user.name}</p>

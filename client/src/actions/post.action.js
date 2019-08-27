@@ -1,11 +1,13 @@
 import Axios from 'axios';
 import { setAlert } from './alert.action';
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES } from './types';
+import setAuthToken from '../utils/saveAuthToken';
+import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST } from './types';
 
 /**
  * Get All Posts
  */
 export const getAllPosts = () => async dispatch => {
+  setAuthToken();
   try {
     const res = await Axios.get('/api/posts');
     dispatch({
@@ -26,7 +28,6 @@ export const getAllPosts = () => async dispatch => {
  * Like
  */
 export const like = (postID) => async dispatch => {
-  console.log('like', postID)
   try {
     const res = await Axios.put(`/api/posts/like/${postID}`);
     dispatch({
@@ -47,14 +48,57 @@ export const like = (postID) => async dispatch => {
  * unlike
  */
 export const unlike = (postID) => async dispatch => {
-  console.log('unlike', postID);
-
   try {
     const res = await Axios.put(`/api/posts/unlike/${postID}`);
     dispatch({
       type: UPDATE_LIKES,
       payload: { postID, likes: res.data }
     });
+  } catch (err) {
+    if (err.response)
+      dispatch({
+        type: POST_ERROR,
+        payload: { message: err.response.data.message, status: err.response.data.status }
+      });
+  }
+}
+
+/**
+ * Add Post
+ */
+export const addPost = (formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const res = await Axios.post('/api/posts', formData, config);
+    dispatch({
+      type: ADD_POST,
+      payload: res.data
+    });
+    dispatch(setAlert('Post Created', 'success', 3000));
+  } catch (err) {
+    if (err.response)
+      dispatch({
+        type: POST_ERROR,
+        payload: { message: err.response.data.message, status: err.response.data.status }
+      });
+  }
+}
+
+/**
+ * Delete Post
+ */
+export const deletePost = (postID) => async dispatch => {
+  try {
+    const res = await Axios.delete(`/api/posts/${postID}`);
+    dispatch({
+      type: DELETE_POST,
+      payload: { postID }
+    });
+    dispatch(setAlert('Post Has been Removed', 'success', 3000));
   } catch (err) {
     if (err.response)
       dispatch({

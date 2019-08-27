@@ -57,11 +57,11 @@ deletePost = async (req, res, next) => {
 
 addPost = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id).select(['id', 'name', 'avatar']);
 
     const newPost = new Posts({
       text: req.body.text,
-      user: req.user.id
+      user
     });
 
     await newPost.save();
