@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
 
 class ProfileItem extends Component {
   static propTypes = {
@@ -18,8 +22,9 @@ class ProfileItem extends Component {
     return (
       <div>
         <div className="profile bg-light">
-          <img
+          <LazyLoadImage
             className="round-img"
+            effect="blur"
             src={avatar}
             alt={name}
           />

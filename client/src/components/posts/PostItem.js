@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { like, unlike, deletePost } from '../../actions/post.action';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
 
 class PostItem extends Component {
   static propTypes = {
@@ -34,7 +38,8 @@ class PostItem extends Component {
         <div className="post bg-white p-1 my-1">
           <div>
             <Link to={`/developer/profile/${this.props.post.user._id}`}>
-              <img
+              <LazyLoadImage
+                effect="blur"
                 className="round-img"
                 src={avatar}
                 alt={name} />

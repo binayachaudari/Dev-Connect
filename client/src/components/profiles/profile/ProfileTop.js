@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 class ProfileTop extends Component {
   static propTypes = {
@@ -17,8 +20,9 @@ class ProfileTop extends Component {
 
     return (
       <div className="profile-top bg-primary p-2">
-        <img
+        <LazyLoadImage
           className="round-img my-1"
+          effect="blur"
           src={avatar}
           alt={name}
         />

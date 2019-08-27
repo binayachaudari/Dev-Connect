@@ -3,6 +3,6 @@ import loadingGIF from '../../assets/images/loading.gif';
 
 export default () => (
   <Fragment>
-    <img src={loadingGIF} style={{ margin: '0 auto', width: '500px', display: 'block' }} alt='Loading...'></img>
+    <img src={loadingGIF} style={{ margin: '0 auto', width: '500px', display: 'block' }} alt='Loading...' />
   </Fragment>
 );

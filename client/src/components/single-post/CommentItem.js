@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteComment } from '../../actions/post.action';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 class CommentItem extends Component {
   static propTypes = {
@@ -25,7 +28,8 @@ class CommentItem extends Component {
       <div className="post bg-white p-1 my-1">
         <div>
           <Link to={`/developer/profile/${this.props.comment.user._id}`}>
-            <img
+            <LazyLoadImage
+              effect="blur"
               className="round-img"
               src={avatar}
               alt={name}
