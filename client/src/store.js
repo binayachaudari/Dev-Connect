@@ -12,6 +12,13 @@ const composeEnhancers = composeWithDevTools({
   trace: true,
   traceLimit: 25
 });
-const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(...middleware)));
+let store = createStore(rootReducer, initialState, applyMiddleware(...middleware));
+/**
+ * Disable redux dev tools in production
+ */
+if (process.env.NODE_ENV !== 'production') {
+  store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(...middleware)));
+}
+
 
 export default store;
