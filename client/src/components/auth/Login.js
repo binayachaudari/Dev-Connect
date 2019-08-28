@@ -11,6 +11,9 @@ class Login extends Component {
     formData: {
       email: '',
       password: '',
+    },
+    button: {
+      loading: false
     }
   };
 
@@ -31,11 +34,13 @@ class Login extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = this.state.formData;
+    this.setState({ button: { loading: true } })
     this.props.login(email, password);
   }
 
   render() {
     const { email, password } = this.state.formData;
+    const { button: { loading } } = this.state;
     const { isAuthenticated } = this.props;
 
     if (localStorage.getItem('x-access-token')) {
@@ -77,7 +82,7 @@ class Login extends Component {
               required
             />
           </div>
-          <input type="submit" className="btn btn-primary" value="Login" />
+          <input type="submit" className="btn btn-primary" value={loading ? 'Loading...' : 'Login'} disabled={loading} />
         </form>
         <p className="my-1">
           Don't have an account? <Link to="/register">Sign Up</Link>

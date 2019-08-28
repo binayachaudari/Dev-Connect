@@ -382,6 +382,16 @@ section p.lead{
   background: var(--light-color);
 }
 
+form input[type='submit']:disabled{
+  background: #17a3b88e;
+  color: black;
+}
+
+form input[type='submit']:disabled:hover{
+  background: #17a3b88e;
+  color:black;
+}
+
 .form input[type='submit'],
 button {
   font: inherit;
