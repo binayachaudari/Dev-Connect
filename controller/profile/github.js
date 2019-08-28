@@ -3,10 +3,12 @@ const config = require('config');
 
 
 module.exports = async (req, res, next) => {
+  const githubClientID = config.get('githubClientID') || process.env.githubClientID;
+  const githubSecret = config.get('githubSecret') || process.env.githubSecret;
   try {
     const options = {
       uri: `https://api.github.com/users/${req.params.username}/repos?per_page=7&sort=created:asc
-      &client_id=${config.get('githubClientID')}&client_secret=${config.get('githubSecret')}`,
+      &client_id=${githubClientID}&client_secret=${githubSecret}`,
       method: 'GET',
       headers: { 'user-agent': 'node.js' }
     }
