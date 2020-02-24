@@ -20,7 +20,8 @@ module.exports = () => {
   mongoose.connect(db, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
   })
     .then(() => console.log('MongoDB Connected...!'))
     .catch(err => {
