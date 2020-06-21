@@ -26,20 +26,22 @@ class Profile extends Component {
         <Fragment>
           <h1 className="large text-primary">Developers</h1>
           <p className="lead">
-            <i className="fab fa-connectdevelop"></i> Browse and connect with developers</p>
+            <i className="fab fa-connectdevelop"></i> Browse and connect with developers
+          </p>
           <div className="profiles">
-            {developer_profiles.length > 0 ? (developer_profiles.map(profile => (
-              <ProfileItem key={profile._id} profile={profile} />
-            ))) : <h4>Loading Profiles...</h4>}
+            {developer_profiles.length > 0 ? (
+              developer_profiles.map((profile) => <ProfileItem key={profile._id} profile={profile} />)
+            ) : (
+              <h4>Loading Profiles...</h4>
+            )}
           </div>
         </Fragment>
-
       </section>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile
 });
 

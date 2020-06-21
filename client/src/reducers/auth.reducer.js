@@ -1,4 +1,13 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, ACCOUNT_DELETED } from '../actions/types';
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  ACCOUNT_DELETED
+} from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('x-access-token'),
@@ -17,7 +26,7 @@ export default (state = initialState, action) => {
         ...payload,
         isAuthenticated: true,
         loading: false
-      }
+      };
 
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -27,7 +36,7 @@ export default (state = initialState, action) => {
         ...payload,
         isAuthenticated: true,
         loading: false
-      }
+      };
 
     case REGISTER_FAIL:
     case AUTH_ERROR:
@@ -46,4 +55,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

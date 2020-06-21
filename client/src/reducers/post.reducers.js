@@ -1,4 +1,14 @@
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_SINGLE_POST, DISPLAY_POST, ADD_COMMENT, REMOVE_COMMENT } from '../actions/types';
+import {
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+  DELETE_POST,
+  ADD_POST,
+  GET_SINGLE_POST,
+  DISPLAY_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT
+} from '../actions/types';
 
 const initialState = {
   post: null,
@@ -14,43 +24,43 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ...payload,
-        loading: false,
+        loading: false
       };
 
     case UPDATE_LIKES:
       return {
         ...state,
-        posts: state.posts.map(post => post._id === payload.postID ? { ...post, ...payload.likes } : post),
-        loading: false,
-      }
+        posts: state.posts.map((post) => (post._id === payload.postID ? { ...post, ...payload.likes } : post)),
+        loading: false
+      };
 
     case ADD_POST:
       return {
         ...state,
         posts: [payload, ...state.posts],
         loading: false
-      }
+      };
 
     case DELETE_POST:
       return {
         ...state,
-        posts: state.posts.filter(post => post._id !== payload.postID),
+        posts: state.posts.filter((post) => post._id !== payload.postID),
         loading: false
-      }
+      };
 
     case DISPLAY_POST:
       return {
         ...state,
         ...payload,
         loading: false
-      }
+      };
 
     case GET_SINGLE_POST:
       return {
         ...state,
         ...payload,
         loading: false
-      }
+      };
 
     case ADD_COMMENT:
       return {
@@ -64,7 +74,7 @@ export default (state = initialState, action) => {
         ...state,
         post: {
           ...state.post,
-          comments: state.post.comments.filter(comment => comment._id !== payload.commentID)
+          comments: state.post.comments.filter((comment) => comment._id !== payload.commentID)
         },
         loading: false
       };
@@ -79,4 +89,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

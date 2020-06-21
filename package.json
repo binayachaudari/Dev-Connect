@@ -8,6 +8,8 @@
     "server": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm start --prefix client",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
+    "prettier": "prettier --single-quote \"{client,api}/**/*.js\" \"{client,api}/**/*.css\"",
     "dev": "concurrently \" npm run server \" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
+    "prettier": "^2.0.5",
     "redux-devtools-extension": "^2.13.8"
   }
 }

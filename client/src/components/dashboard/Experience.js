@@ -7,18 +7,18 @@ class Experience extends Component {
   static propTypes = {
     experiences: PropTypes.array.isRequired,
     deleteExpOrEdu: PropTypes.func.isRequired
-  }
+  };
 
   getDate = (date) => {
     const ISODate = new Date(date);
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     return ISODate.toLocaleString('en', options);
-  }
+  };
 
   render() {
     const { experiences } = this.props;
-    const experince = experiences.map(exp => (
-      <tr key={exp._id} >
+    const experince = experiences.map((exp) => (
+      <tr key={exp._id}>
         <td>{exp.company}</td>
         <td className="hide-sm">{exp.title}</td>
         <td className="hide-sm">{exp.location}</td>
@@ -28,10 +28,10 @@ class Experience extends Component {
         <td>
           <button className="btn btn-danger" onClick={() => this.props.deleteExpOrEdu(exp._id, 'experience')}>
             Delete
-              </button>
+          </button>
         </td>
-      </tr >
-    ))
+      </tr>
+    ));
     return (
       <Fragment>
         <h2 className="my-2">Experience Credentials</h2>
@@ -45,14 +45,11 @@ class Experience extends Component {
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            {experince}
-          </tbody>
+          <tbody>{experince}</tbody>
         </table>
       </Fragment>
-    )
+    );
   }
 }
-
 
 export default connect(null, { deleteExpOrEdu })(Experience);

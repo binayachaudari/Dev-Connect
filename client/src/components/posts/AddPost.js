@@ -5,24 +5,24 @@ import { addPost } from '../../actions/post.action';
 
 class AddPost extends Component {
   static propTypes = {
-    addPost: PropTypes.func.isRequired,
-  }
+    addPost: PropTypes.func.isRequired
+  };
 
   state = {
     text: ''
-  }
+  };
 
   onChange = (e) => {
     const newState = { ...this.state };
     newState[e.target.name] = e.target.value;
     this.setState({ ...newState });
-  }
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
     this.props.addPost({ ...this.state });
-    this.setState({ text: '' })
-  }
+    this.setState({ text: '' });
+  };
 
   render() {
     const { text } = this.state;
@@ -41,7 +41,7 @@ class AddPost extends Component {
           <input type="submit" className="btn btn-dark my-1" value="Submit" />
         </form>
       </div>
-    )
+    );
   }
 }
 

@@ -1,7 +1,6 @@
 const request = require('request');
 const config = require('config');
 
-
 module.exports = async (req, res, next) => {
   const githubClientID = config.get('githubClientID') || process.env.githubClientID;
   const githubSecret = config.get('githubSecret') || process.env.githubSecret;
@@ -11,7 +10,7 @@ module.exports = async (req, res, next) => {
       &client_id=${githubClientID}&client_secret=${githubSecret}`,
       method: 'GET',
       headers: { 'user-agent': 'node.js' }
-    }
+    };
 
     request(options, (error, response, body) => {
       if (error) {
@@ -25,16 +24,15 @@ module.exports = async (req, res, next) => {
         return next({
           status: 404,
           message: 'No github Profile'
-        })
+        });
       }
 
       res.json(JSON.parse(body));
-
-    })
+    });
   } catch (err) {
     next({
       status: 500,
       message: err
-    })
+    });
   }
-}
+};

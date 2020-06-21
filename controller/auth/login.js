@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     if (!user) {
       return next({
         status: 400,
-        message: "Invalid Credentials"
+        message: 'Invalid Credentials'
       });
     }
 
@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
     if (!isMatched) {
       return next({
         status: 400,
-        message: "Invalid Credentials"
+        message: 'Invalid Credentials'
       });
     }
 
@@ -30,17 +30,16 @@ module.exports = async (req, res, next) => {
       user: {
         id: user.id
       }
-    }
+    };
 
     //Return JWT Token
     const token = await generateToken(payload);
 
     res.json({ token });
-
   } catch (err) {
     next({
       status: 500,
       message: err.message
-    })
+    });
   }
-}
+};

@@ -7,23 +7,23 @@ class CommentForm extends Component {
   static propTypes = {
     addComment: PropTypes.func.isRequired,
     postID: PropTypes.string.isRequired
-  }
+  };
 
   state = {
     text: ''
-  }
+  };
 
   onChange = (e) => {
     const newState = { ...this.state };
     newState[e.target.name] = e.target.value;
     this.setState({ ...newState });
-  }
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
     this.props.addComment(this.props.postID, { ...this.state });
-    this.setState({ text: '' })
-  }
+    this.setState({ text: '' });
+  };
 
   render() {
     const { text } = this.state;
@@ -42,7 +42,7 @@ class CommentForm extends Component {
           <input type="submit" className="btn btn-dark my-1" value="Submit" />
         </form>
       </div>
-    )
+    );
   }
 }
 

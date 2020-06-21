@@ -9,18 +9,17 @@ myProfile = async (req, res, next) => {
       return next({
         status: 400,
         message: 'No profile for this user'
-      })
+      });
     }
 
-    res.json({ profile: profileID })
-
+    res.json({ profile: profileID });
   } catch (err) {
     next({
       status: 500,
       message: err
-    })
+    });
   }
-}
+};
 
 updateProfile = async (req, res, next) => {
   const {
@@ -47,10 +46,10 @@ updateProfile = async (req, res, next) => {
   if (bio) profileFields.bio = bio;
   if (status) profileFields.status = status;
   if (github_username) profileFields.github_username = github_username;
-  if (skills) profileFields.skills = skills.split(',').map(skill => skill.trim());
+  if (skills) profileFields.skills = skills.split(',').map((skill) => skill.trim());
 
   //Build Social Object
-  profileFields.social = {}
+  profileFields.social = {};
   if (facebook) profileFields.social.facebook = facebook;
   if (twitter) profileFields.social.twitter = twitter;
   if (instagram) profileFields.social.instagram = instagram;
@@ -62,7 +61,9 @@ updateProfile = async (req, res, next) => {
     let user = await User.findById(req.user.id).select('avatar');
 
     if (user) {
-      user.avatar = github_username ? `https://avatars.githubusercontent.com/${github_username}` : 'https://avatars.githubusercontent.com/username';
+      user.avatar = github_username
+        ? `https://avatars.githubusercontent.com/${github_username}`
+        : 'https://avatars.githubusercontent.com/username';
       await user.save();
     }
 
@@ -71,7 +72,8 @@ updateProfile = async (req, res, next) => {
       profile = await Profile.findOneAndUpdate(
         { user: req.user.id },
         { $set: profileFields },
-        { new: true }).populate('user', ['name', 'email']);
+        { new: true }
+      ).populate('user', ['name', 'email']);
 
       return res.json(profile);
     }
@@ -81,43 +83,40 @@ updateProfile = async (req, res, next) => {
     await profile.save();
 
     res.json(profile);
-
   } catch (err) {
     next({
       status: 500,
       message: err
-    })
+    });
   }
-}
+};
 
-deleteProfile =
-  module.exports = async (req, res, next) => {
-    try {
-      /**
-       * @todo Delete user Posts
-       * @desc Remove Profile
-       */
-      await Profile.findOneAndDelete({ user: req.user.id });
+deleteProfile = module.exports = async (req, res, next) => {
+  try {
+    /**
+     * @todo Delete user Posts
+     * @desc Remove Profile
+     */
+    await Profile.findOneAndDelete({ user: req.user.id });
 
-      //Delete User
-      await User.findOneAndDelete({ _id: req.user.id });
+    //Delete User
+    await User.findOneAndDelete({ _id: req.user.id });
 
-      res.json({
-        status: 200,
-        message: 'User has been deleted'
-      });
-
-    } catch (err) {
-      console.log(err)
-      next({
-        status: 400,
-        message: "Server Error"
-      })
-    }
+    res.json({
+      status: 200,
+      message: 'User has been deleted'
+    });
+  } catch (err) {
+    console.log(err);
+    next({
+      status: 400,
+      message: 'Server Error'
+    });
   }
+};
 
 module.exports = {
   myProfile,
   updateProfile,
   deleteProfile
-}
+};

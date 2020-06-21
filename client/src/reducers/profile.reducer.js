@@ -1,4 +1,15 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_EXPERIENCE, UPDATE_EDUCATION, REMOVE_EXP_OR_EDU, GET_ALL_PROFILES, GET_GITHUB_REPOS, CLEAR_REPOS, UPDATE_DEV_PROFILE } from '../actions/types';
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  CLEAR_PROFILE,
+  UPDATE_EXPERIENCE,
+  UPDATE_EDUCATION,
+  REMOVE_EXP_OR_EDU,
+  GET_ALL_PROFILES,
+  GET_GITHUB_REPOS,
+  CLEAR_REPOS,
+  UPDATE_DEV_PROFILE
+} from '../actions/types';
 
 const intialState = {
   profile: null,
@@ -6,7 +17,7 @@ const intialState = {
   repos: [],
   loading: true,
   error: {}
-}
+};
 
 export default (state = intialState, action) => {
   const { type, payload } = action;
@@ -25,21 +36,21 @@ export default (state = intialState, action) => {
         ...state,
         developer_profiles: payload,
         loading: false
-      }
+      };
 
     case GET_GITHUB_REPOS:
       return {
         ...state,
         repos: payload,
         loading: false
-      }
+      };
 
     case REMOVE_EXP_OR_EDU:
       return {
         ...state,
         profile: payload,
         loading: false
-      }
+      };
 
     case PROFILE_ERROR:
       return {
@@ -53,14 +64,14 @@ export default (state = intialState, action) => {
         ...state,
         repos: [],
         loading: false
-      }
+      };
 
     case UPDATE_DEV_PROFILE:
       return {
         ...state,
         profile: payload,
         loading: false
-      }
+      };
 
     case CLEAR_PROFILE:
       return {
@@ -73,4 +84,4 @@ export default (state = intialState, action) => {
     default:
       return state;
   }
-}
+};

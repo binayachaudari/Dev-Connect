@@ -35,28 +35,29 @@ const App = () => {
     store.dispatch(loadUser());
   }, []);
 
-  return (<Provider store={store}>
-    <Router>
-      <Fragment>
-        <Navbar />
-        <Route exact path='/' component={LandingPage} />
-        <Switch>
-          <PrivateRoute exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/developers' component={Profiles} />
-          <Route exact path='/developer/profile/:id' component={Profile} />
-          <PrivateRoute exact path='/create-profile' component={CreateProfile} />
-          <PrivateRoute exact path='/edit-profile' component={EditProfile} />
-          <PrivateRoute exact path='/add-experience' component={AddExperience} />
-          <PrivateRoute exact path='/add-education' component={AddEducation} />
-          <PrivateRoute exact path='/posts' component={AllPosts} />
-          <PrivateRoute exact path='/post/:id' component={SinglePost} />
-        </Switch>
-      </Fragment>
-    </Router>
-  </Provider>
-  )
-}
+  return (
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Route exact path="/" component={LandingPage} />
+          <Switch>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/developers" component={Profiles} />
+            <Route exact path="/developer/profile/:id" component={Profile} />
+            <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+            <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+            <PrivateRoute exact path="/add-experience" component={AddExperience} />
+            <PrivateRoute exact path="/add-education" component={AddEducation} />
+            <PrivateRoute exact path="/posts" component={AllPosts} />
+            <PrivateRoute exact path="/post/:id" component={SinglePost} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;

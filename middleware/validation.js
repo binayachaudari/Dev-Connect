@@ -7,8 +7,8 @@ module.exports = (req, res, next) => {
     return next({
       status: 400,
       message: errors.array()
-    })
+    });
   }
 
   next();
-}
+};

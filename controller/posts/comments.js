@@ -9,13 +9,12 @@ addComment = async (req, res, next) => {
     const newComment = {
       user,
       text: req.body.text
-    }
+    };
 
     post.comments.unshift(newComment);
     await post.save();
 
     res.json(post.comments);
-
   } catch (err) {
     next({
       status: 500,
@@ -28,7 +27,7 @@ deleteComment = async (req, res, next) => {
   try {
     const post = await Posts.findById(req.params.post_id);
 
-    const comment = post.comments.find(comment => comment.id === req.params.comment_id);
+    const comment = post.comments.find((comment) => comment.id === req.params.comment_id);
 
     //Make Sure comment exists
     if (!comment) {
@@ -47,21 +46,20 @@ deleteComment = async (req, res, next) => {
     }
 
     //Get remove index
-    const removeIndex = post.comments.indexOf(comment)
+    const removeIndex = post.comments.indexOf(comment);
     post.comments.splice(removeIndex, 1);
     await post.save();
 
     res.json({ comments: post.comments });
-
   } catch (err) {
     next({
       status: 500,
       message: err.message
     });
   }
-}
+};
 
 module.exports = {
   addComment,
   deleteComment
-}
+};

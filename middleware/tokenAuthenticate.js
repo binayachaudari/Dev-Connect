@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
   if (!token) {
     return next({
       status: 403,
-      message: "No access token, Access Denied!"
+      message: 'No access token, Access Denied!'
     });
   }
 
@@ -30,11 +30,10 @@ module.exports = (req, res, next) => {
     req.user = decoded.user;
 
     next();
-
   } catch (err) {
     next({
       status: 401,
       message: 'Access Denied!'
-    })
+    });
   }
-}
+};

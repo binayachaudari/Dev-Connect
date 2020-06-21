@@ -10,57 +10,55 @@ class Login extends Component {
   state = {
     formData: {
       email: '',
-      password: '',
+      password: ''
     },
     button: {
       loading: false
     }
   };
 
-
   static propTypes = {
     login: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired
-  }
-
+  };
 
   onChange = (e) => {
-    const newFormData = { ...this.state.formData }
+    const newFormData = { ...this.state.formData };
     newFormData[e.target.name] = e.target.value;
 
-    this.setState({ formData: newFormData })
-  }
+    this.setState({ formData: newFormData });
+  };
 
   onSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = this.state.formData;
-    this.setState({ button: { loading: true } })
+    this.setState({ button: { loading: true } });
     this.props.login(email, password);
-  }
+  };
 
   render() {
     const { email, password } = this.state.formData;
-    const { button: { loading } } = this.state;
+    const {
+      button: { loading }
+    } = this.state;
     const { isAuthenticated } = this.props;
 
     if (localStorage.getItem('x-access-token')) {
-      return (
-        <Redirect to='/dashboard' />
-      )
+      return <Redirect to="/dashboard" />;
     }
 
     //Redirect to dashboard
     if (isAuthenticated) {
-      return (
-        <Redirect to='/dashboard' />
-      )
+      return <Redirect to="/dashboard" />;
     }
 
     return (
       <section className="container">
         <Alert />
         <h1 className="large text-primary">Sign In</h1>
-        <p className="lead"><i className="fas fa-user"></i> Sign into Your Account</p>
+        <p className="lead">
+          <i className="fas fa-user"></i> Sign into Your Account
+        </p>
         <form className="form" onSubmit={this.onSubmit}>
           <div className="form-group">
             <input
@@ -82,17 +80,22 @@ class Login extends Component {
               required
             />
           </div>
-          <input type="submit" className="btn btn-primary" value={loading ? 'Loading...' : 'Login'} disabled={loading} />
+          <input
+            type="submit"
+            className="btn btn-primary"
+            value={loading ? 'Loading...' : 'Login'}
+            disabled={loading}
+          />
         </form>
         <p className="my-1">
           Don't have an account? <Link to="/register">Sign Up</Link>
         </p>
       </section>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 

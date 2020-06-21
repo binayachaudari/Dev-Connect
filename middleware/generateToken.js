@@ -7,6 +7,6 @@ module.exports = (payload) => {
     jwt.sign(payload, jwtSecret, { expiresIn: '30d' }, (err, token) => {
       if (err) reject(err);
       resolve(token);
-    })
-  })
-}
+    });
+  });
+};

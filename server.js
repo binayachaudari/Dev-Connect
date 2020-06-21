@@ -11,18 +11,16 @@ const PORT = process.env.PORT || 5000;
  */
 connectDB();
 
-/** 
+/**
  * Inbuild Middleware
  */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 /**
  * Routing Middleware
  */
 app.use('/api', require('./routes/api'));
-
 
 /**
  * Server static in production
@@ -31,8 +29,8 @@ if (process.env.NODE_ENV === 'production') {
   //set static folder
   app.use(express.static('client/build'));
   app.get('*', (req, res, next) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
 /**
@@ -43,8 +41,8 @@ app.use((req, res, next) => {
   next({
     status: 404,
     message: '404 page not found'
-  })
-})
+  });
+});
 
 /**
  * Error Handling Middleware
@@ -57,9 +55,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-/** 
+/**
  * Start Server
  */
 app.listen(PORT, () => {
   console.log(`Server Started, Listening to port ${PORT}`);
-})
+});

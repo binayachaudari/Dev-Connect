@@ -11,7 +11,7 @@ getPosts = async (req, res, next) => {
       message: err.message
     });
   }
-}
+};
 
 getPostByID = async (req, res, next) => {
   try {
@@ -24,15 +24,14 @@ getPostByID = async (req, res, next) => {
       });
     }
 
-    res.json({ post })
-
+    res.json({ post });
   } catch (err) {
     next({
       status: 404,
       message: 'Post not found'
     });
   }
-}
+};
 
 deletePost = async (req, res, next) => {
   try {
@@ -53,7 +52,7 @@ deletePost = async (req, res, next) => {
       message: 'Post not found'
     });
   }
-}
+};
 
 addPost = async (req, res, next) => {
   try {
@@ -66,7 +65,6 @@ addPost = async (req, res, next) => {
 
     await newPost.save();
     res.json({ ...newPost._doc, user });
-
   } catch (err) {
     next({
       status: 500,
@@ -79,5 +77,5 @@ module.exports = {
   getPosts,
   getPostByID,
   deletePost,
-  addPost,
-}
+  addPost
+};

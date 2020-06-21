@@ -12,41 +12,50 @@ class singlePost extends Component {
   static propTypes = {
     getSinglePost: PropTypes.func.isRequired,
     post: PropTypes.object.isRequired
-  }
+  };
 
   componentDidMount = () => {
-    const { post: { posts }, computedMatch: { params } } = this.props;
-    const currPost = posts.find(post => post._id === params.id);
-    if (currPost)
-      this.props.displayPost(currPost);
+    const {
+      post: { posts },
+      computedMatch: { params }
+    } = this.props;
+    const currPost = posts.find((post) => post._id === params.id);
+    if (currPost) this.props.displayPost(currPost);
 
     this.props.getSinglePost(params.id);
-  }
+  };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.post.post === this.props.post.post)
-      this.props.getSinglePost(this.props.computedMatch.params.id);
-  }
+    if (prevProps.post.post === this.props.post.post) this.props.getSinglePost(this.props.computedMatch.params.id);
+  };
 
   render() {
-    const { post: { post, loading } } = this.props;
+    const {
+      post: { post, loading }
+    } = this.props;
     return (
       <section className="container">
-        <Link to="/posts" className="btn btn-light-outline" style={{ marginRight: '15px' }}>Back To Posts</Link>
+        <Link to="/posts" className="btn btn-light-outline" style={{ marginRight: '15px' }}>
+          Back To Posts
+        </Link>
         <Alert />
-        {(!loading && post) ? (
+        {!loading && post ? (
           <Fragment>
             <PostItem post={post} displayDiscussionBtn={false} />
             <CommentForm postID={post._id} />
-            {post.comments.map(comment => (<CommentItem key={comment._id} comment={comment} postID={post._id}></CommentItem>))}
+            {post.comments.map((comment) => (
+              <CommentItem key={comment._id} comment={comment} postID={post._id}></CommentItem>
+            ))}
           </Fragment>
-        ) : <h4>Loading...</h4>}
+        ) : (
+          <h4>Loading...</h4>
+        )}
       </section>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   post: state.post
 });
 

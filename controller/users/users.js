@@ -4,14 +4,14 @@ const User = require('../../models/Users');
 allUserData = async (req, res, next) => {
   try {
     const profiles = await Profile.find().populate('user', ['name', 'avatar']);
-    res.json(profiles)
+    res.json(profiles);
   } catch (err) {
     next({
       status: 500,
       message: err.message
     });
   }
-}
+};
 
 userData = async (req, res, next) => {
   try {
@@ -20,17 +20,16 @@ userData = async (req, res, next) => {
       return next({
         status: 404,
         message: 'User does not exist'
-      })
+      });
 
     res.json({ user });
-
   } catch (err) {
     next({
       status: 500,
       message: err.message
     });
   }
-}
+};
 
 userDataByID = async (req, res, next) => {
   try {
@@ -40,22 +39,21 @@ userDataByID = async (req, res, next) => {
       return next({
         status: 400,
         message: 'Profile does not Exist!'
-      })
+      });
     }
 
     res.json({ profile });
-
   } catch (err) {
     console.log(err);
     next({
       status: 500,
-      message: "Invalid User ID"
-    })
+      message: 'Invalid User ID'
+    });
   }
-}
+};
 
 module.exports = {
   userData,
   userDataByID,
   allUserData
-}
+};

@@ -16,7 +16,7 @@ class Dashboard extends Component {
     profile: PropTypes.object.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired
-  }
+  };
 
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -31,33 +31,44 @@ class Dashboard extends Component {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
     return (
-      <div className='container'>
+      <div className="container">
         <Alert />
-        {(loading || auth.loading) ? <Loading /> :
+        {loading || auth.loading ? (
+          <Loading />
+        ) : (
           <Fragment>
             <h1 className="large text-primary">Dashboard</h1>
-            <p className="lead username"><i className="fas fa-user"></i> Welcome {auth.user && auth.user.name}</p>
-            {profile ? <DashboardNav /> :
+            <p className="lead username">
+              <i className="fas fa-user"></i> Welcome {auth.user && auth.user.name}
+            </p>
+            {profile ? (
+              <DashboardNav />
+            ) : (
               <Fragment>
-                <p >Set up your Profile </p>
-                <Link to='/create-profile' className='btn btn-primary-outline'>Create Profile</Link>
-              </Fragment>}
+                <p>Set up your Profile </p>
+                <Link to="/create-profile" className="btn btn-primary-outline">
+                  Create Profile
+                </Link>
+              </Fragment>
+            )}
             {profile && profile.experience.length > 0 && <Experience experiences={profile.experience} />}
             {profile && profile.education.length > 0 && <Education educations={profile.education} />}
-            <div className="my-2"><button className="btn btn-danger-outline" onClick={this.props.deleteAccount}>
-              <i className="fas fa-user-minus mr-1"></i>
-              Delete Account
-              </button></div>
+            <div className="my-2">
+              <button className="btn btn-danger-outline" onClick={this.props.deleteAccount}>
+                <i className="fas fa-user-minus mr-1"></i>
+                Delete Account
+              </button>
+            </div>
           </Fragment>
-        }
+        )}
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile
-})
+});
 
 export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);

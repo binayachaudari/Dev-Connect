@@ -3,37 +3,36 @@ import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-
 class ProfileTop extends Component {
   static propTypes = {
     profile: PropTypes.object.isRequired
-  }
+  };
 
   render() {
-    const { user: { name, avatar },
+    const {
+      user: { name, avatar },
       status,
       company,
       location,
       website,
-      social,
+      social
     } = this.props.profile;
 
     return (
       <div className="profile-top bg-primary p-2">
-        <LazyLoadImage
-          className="round-img my-1"
-          effect="blur"
-          src={avatar}
-          alt={name}
-        />
+        <LazyLoadImage className="round-img my-1" effect="blur" src={avatar} alt={name} />
         <h1 className="large">{name}</h1>
-        <p className="lead">{status} {company && <span>at {company}</span>}</p>
+        <p className="lead">
+          {status} {company && <span>at {company}</span>}
+        </p>
         <p>{location && <span>{location}</span>}</p>
 
         <div className="icons my-1">
-          {website && <a href={website} target="_blank" rel="noopener noreferrer">
-            <i className="fas fa-globe fa-2x"></i>
-          </a>}
+          {website && (
+            <a href={website} target="_blank" rel="noopener noreferrer">
+              <i className="fas fa-globe fa-2x"></i>
+            </a>
+          )}
           {social && (
             <Fragment>
               {social.twitter && (
@@ -68,8 +67,8 @@ class ProfileTop extends Component {
           )}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default ProfileTop
+export default ProfileTop;

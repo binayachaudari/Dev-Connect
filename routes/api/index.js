@@ -10,14 +10,14 @@ router.use('/auth', require('./auth'));
 /**
  * @route   /api/posts
  * @desc    Middleware for /api/posts Route
- * @access  
+ * @access
  */
 router.use('/posts', require('./posts'));
 
 /**
  * @route   /api/profile
  * @desc    Middleware for /api/profile Route
- * @access  
+ * @access
  */
 router.use('/profile', require('./profile'));
 
@@ -27,6 +27,5 @@ router.use('/profile', require('./profile'));
  * @access  Protected
  */
 router.use('/users', require('./users'));
-
 
 module.exports = router;

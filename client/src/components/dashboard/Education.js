@@ -7,18 +7,18 @@ class Education extends Component {
   static propTypes = {
     educations: PropTypes.array.isRequired,
     deleteExpOrEdu: PropTypes.func.isRequired
-  }
+  };
 
   getDate = (date) => {
     const ISODate = new Date(date);
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     return ISODate.toLocaleString('en', options);
-  }
+  };
 
   render() {
     const { educations } = this.props;
-    const education = educations.map(edu => (
-      <tr key={edu._id} >
+    const education = educations.map((edu) => (
+      <tr key={edu._id}>
         <td>{edu.school}</td>
         <td className="hide-sm">{edu.degree}</td>
         <td className="hide-sm">{edu.field_of_study}</td>
@@ -28,10 +28,10 @@ class Education extends Component {
         <td>
           <button className="btn btn-danger" onClick={() => this.props.deleteExpOrEdu(edu._id, 'education')}>
             Delete
-              </button>
+          </button>
         </td>
-      </tr >
-    ))
+      </tr>
+    ));
     return (
       <Fragment>
         <h2 className="my-2">Education Credentials</h2>
@@ -45,14 +45,11 @@ class Education extends Component {
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            {education}
-          </tbody>
+          <tbody>{education}</tbody>
         </table>
       </Fragment>
-    )
+    );
   }
 }
-
 
 export default connect(null, { deleteExpOrEdu })(Education);
